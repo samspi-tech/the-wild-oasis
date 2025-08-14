@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { type User } from '../cabins/page';
 
 type CounterProps = {
-    users: [];
+    users: User[];
 };
 
 export default function Counter({ users }: CounterProps) {

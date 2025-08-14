@@ -1,19 +1,19 @@
 import Counter from '../components/Counter';
 
-type User = {
-    id: string;
+export type User = {
+    id: number;
     name: string;
 };
 
 export default async function Page() {
     const res = await fetch('https://jsonplaceholder.typicode.com/users');
-    const users = await res.json();
+    const users: User[] = await res.json();
 
     return (
         <div>
             <h1>Cabins page</h1>
             <ul>
-                {users.map((user: User) => (
+                {users.map((user) => (
                     <li key={user.id}>{user.name}</li>
                 ))}
             </ul>
