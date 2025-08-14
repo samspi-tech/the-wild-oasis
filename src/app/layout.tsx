@@ -1,6 +1,6 @@
+import Logo from '@/components/Logo';
 import { type ReactNode } from 'react';
-import Logo from '@/src/components/Logo';
-import Navigation from '@/src/components/Navigation';
+import Navigation from '@/components/Navigation';
 
 export const metadata = {
     title: 'The Wild Oasis',

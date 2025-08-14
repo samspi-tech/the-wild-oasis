@@ -1,4 +1,4 @@
-import Counter from '@/src/components/Counter';
+import Counter from '@/components/Counter';
 
 export type User = {
     id: number;
