@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { type User } from '@/app/cabins/page';
+import { type User } from '@/src/app/cabins/page';
 
 type CounterProps = {
     users: User[];

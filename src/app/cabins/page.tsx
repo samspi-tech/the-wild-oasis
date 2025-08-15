@@ -1,4 +1,8 @@
-import Counter from '@/components/Counter';
+import Counter from '@/src/components/Counter';
+
+export const metadata = {
+    title: 'Cabins',
+};
 
 export type User = {
     id: number;
