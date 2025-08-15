@@ -4,7 +4,10 @@ import logo from '@/public/logo.png';
 
 export default function Logo() {
     return (
-        <Link href="/" className="z-10 flex items-center gap-4">
+        <Link
+            href="/"
+            className="z-10 flex items-center gap-4 self-start md:self-center"
+        >
             <Image
                 src={logo}
                 width="60"

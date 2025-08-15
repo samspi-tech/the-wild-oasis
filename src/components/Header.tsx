@@ -4,7 +4,7 @@ import Navigation from '@/src/components/Navigation';
 function Header() {
     return (
         <header className="border-b border-primary-900 px-8 py-5">
-            <div className="mx-auto flex max-w-7xl items-center justify-between">
+            <div className="mx-auto flex max-w-7xl flex-col gap-10 md:flex-row md:justify-between md:gap-0">
                 <Logo />
                 <Navigation />
             </div>
