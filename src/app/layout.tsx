@@ -1,8 +1,7 @@
 import '@/src/styles/globals.css';
 import { type ReactNode } from 'react';
-import Logo from '@/src/components/Logo';
+import Header from '@/src/components/Header';
 import { Josefin_Sans } from 'next/font/google';
-import Navigation from '@/src/components/Navigation';
 
 export const metadata = {
     title: {
@@ -26,13 +25,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <html lang="en">
             <body
-                className={`${josefinFont.className} bg-primary-950 text-primary-100 min-h-screen`}>
-                <header>
-                    <Logo />
-                    <Navigation />
-                </header>
-                <main>{children}</main>
-                <footer>Copyright by The Wild Oasis</footer>
+                className={`${josefinFont.className} flex min-h-screen flex-col bg-primary-950 text-primary-100 antialiased`}
+            >
+                <Header />
+                <div className="flex-1 px-8 py-12">
+                    <main className="mx-auto max-w-7xl">{children}</main>
+                </div>
             </body>
         </html>
     );
