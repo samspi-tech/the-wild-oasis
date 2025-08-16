@@ -3,3 +3,5 @@
 Practicing Next.js, TypeScript and Tailwind.
 
 This project idea is not mine. All credit goes to Jonas Schmedtmann.
+
+I wrote the code using TypeScript and added responsiveness.
