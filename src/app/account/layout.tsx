@@ -10,7 +10,7 @@ import { type LayoutProps } from '../layout';
 import SideNavigation from '@/src/components/sideNavigation/SideNavigation';
 
 export default function Layout({ children }: LayoutProps) {
-    const [screenWidth, setScreenWidth] = useState(0);
+    const [screenWidth, setScreenWidth] = useState(801);
     const [isSideNavVisible, setIsSideNavVisible] = useState(true);
 
     const isSmallScreen = screenWidth < 801;
