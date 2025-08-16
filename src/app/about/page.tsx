@@ -10,7 +10,7 @@ export const metadata = {
 export default function Page() {
     return (
         <div className="grid grid-cols-5 items-center gap-y-14 text-lg lg:gap-x-24 lg:gap-y-32">
-            <div className="order-1 col-span-5 lg:col-span-3">
+            <section className="order-1 col-span-5 lg:col-span-3">
                 <h1 className="mb-10 text-4xl font-medium text-accent-400">
                     Welcome to The Wild Oasis
                 </h1>
@@ -36,7 +36,7 @@ export default function Page() {
                         feel the joy of being together in a beautiful setting.
                     </p>
                 </div>
-            </div>
+            </section>
             <div className="order-2 col-span-5 lg:col-span-2">
                 <Image
                     quality={80}
@@ -53,7 +53,7 @@ export default function Page() {
                     alt="Family that manages The Wild Oasis"
                 />
             </div>
-            <div className="order-3 col-span-5 lg:order-4 lg:col-span-3">
+            <section className="order-3 col-span-5 lg:order-4 lg:col-span-3">
                 <h1 className="mb-10 text-4xl font-medium text-accent-400">
                     Managed by our family since 1962
                 </h1>
@@ -75,7 +75,7 @@ export default function Page() {
                         like coming home.
                     </p>
                 </div>
-            </div>
+            </section>
             <div className="order-last col-span-5">
                 <Link
                     href="/cabins"

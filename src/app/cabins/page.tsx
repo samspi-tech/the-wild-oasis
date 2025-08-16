@@ -18,7 +18,7 @@ export default function Page() {
     const cabins: Cabin[] = [];
 
     return (
-        <div>
+        <section>
             <h1 className="mb-5 text-4xl font-medium text-accent-400">
                 Our Luxury Cabins
             </h1>
@@ -38,6 +38,6 @@ export default function Page() {
                     ))}
                 </div>
             )}
-        </div>
+        </section>
     );
 }

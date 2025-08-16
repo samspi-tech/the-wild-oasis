@@ -4,8 +4,10 @@ export const metadata = {
 
 export default function Page() {
     return (
-        <div>
-            <h1>Your account</h1>
-        </div>
+        <section>
+            <h2 className="mb-7 text-2xl font-semibold text-accent-400">
+                Welcome, Andrea
+            </h2>
+        </section>
     );
 }
