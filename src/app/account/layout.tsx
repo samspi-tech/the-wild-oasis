@@ -47,12 +47,10 @@ export default function Layout({ children }: LayoutProps) {
                     <ChevronDoubleRightIcon className="h-5 w-5 text-primary-600" />
                 )}
             </button>
-            {/* {isSideNavVisible && ( */}
             <SideNavigation
                 isVisible={isSideNavVisible}
                 onHide={handleSideNavVisibility}
             />
-            {/* )} */}
             <div className="py-1">{children}</div>
         </div>
     );
