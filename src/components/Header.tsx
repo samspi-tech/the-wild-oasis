@@ -1,4 +1,4 @@
-import Logo from '@/src/components/Logo';
+import Logo from '@/src/components/UI/Logo';
 import Navigation from '@/src/components/navigation/Navigation';
 
 export default function Header() {

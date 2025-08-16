@@ -1,16 +1,13 @@
 import Link from 'next/link';
 import { navLinks } from './dataSource';
-import SignOutButton from '@/src/components/SignOutButton';
+import SignOutButton from '@/src/components/UI/SignOutButton';
 
-type SideNavigationProps = {
-    onHide: () => void;
+export type SideNavProps = {
     isVisible: boolean;
+    onToggle: () => void;
 };
 
-export default function SideNavigation({
-    onHide,
-    isVisible,
-}: SideNavigationProps) {
+export default function SideNavigation({ onToggle, isVisible }: SideNavProps) {
     return (
         <nav
             className={`${!isVisible && '-translate-x-[200%] opacity-0'} absolute bottom-0 top-0 border-r border-primary-900 bg-primary-950 transition-all duration-500 min-[801px]:static`}
@@ -24,7 +21,7 @@ export default function SideNavigation({
                         <li key={id}>
                             <Link
                                 href={href}
-                                onClick={onHide}
+                                onClick={onToggle}
                                 className={`flex items-center gap-4 px-5 py-3 font-semibold text-primary-200 transition-colors hover:bg-primary-900 hover:text-primary-100`}
                             >
                                 <Icon className="h-5 w-5 text-primary-600" />
