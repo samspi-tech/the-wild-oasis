@@ -7,9 +7,7 @@ export function useSideNavToggle() {
     const isSmallScreen = screenWidth < 801;
 
     const handleSideNavVisibility = () => {
-        isSmallScreen
-            ? setIsSideNavVisible((prevState) => !prevState)
-            : setIsSideNavVisible(true);
+        isSmallScreen && setIsSideNavVisible((prevState) => !prevState);
     };
 
     const handleScreenWidth = () => setScreenWidth(window.innerWidth);
