@@ -11,12 +11,15 @@ export default function CabinCard({ cabin }: CabinCardProps) {
     const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
 
     return (
-        <article className="flex border border-primary-800">
-            <Image
-                src={image}
-                alt={`Cabin ${name}`}
-                className="flex-1 border-r border-primary-800"
-            />
+        <article className="flex flex-col border border-primary-800 xl:flex-row">
+            <header className="relative aspect-video flex-1">
+                <Image
+                    fill
+                    src={image}
+                    alt={`Cabin ${name}`}
+                    className="border-r border-primary-800 object-cover"
+                />
+            </header>
             <div className="flex-grow">
                 <section className="bg-primary-950 px-7 pb-4 pt-5">
                     <h3 className="mb-3 text-2xl font-semibold text-accent-500">

@@ -1,4 +1,5 @@
 import CabinCard from '@/src/components/CabinCard';
+import { getCabins } from '@/src/lib/dataService';
 
 export const metadata = {
     title: 'Cabins',
@@ -13,9 +14,8 @@ export type Cabin = {
     regularPrice: number;
 };
 
-export default function Page() {
-    // CHANGE
-    const cabins: Cabin[] = [];
+export default async function Page() {
+    const cabins: Cabin[] = await getCabins();
 
     return (
         <section>

@@ -11,9 +11,7 @@ export async function getCabin(id: number) {
     // For testing
     // await new Promise((res) => setTimeout(res, 1000));
 
-    if (error) {
-        console.error(error);
-    }
+    if (error && process.env.NODE_ENV === 'development') console.error(error);
 
     return data;
 }
@@ -25,9 +23,7 @@ export async function getCabinPrice(id: number) {
         .eq('id', id)
         .single();
 
-    if (error) {
-        console.error(error);
-    }
+    if (error && process.env.NODE_ENV === 'development') console.error(error);
 
     return data;
 }
@@ -39,7 +35,7 @@ export const getCabins = async function () {
         .order('name');
 
     if (error) {
-        console.error(error);
+        process.env.NODE_ENV === 'development' && console.error(error);
         throw new Error('Cabins could not be loaded');
     }
 
@@ -64,7 +60,7 @@ export async function getBooking(id: number) {
         .single();
 
     if (error) {
-        console.error(error);
+        process.env.NODE_ENV === 'development' && console.error(error);
         throw new Error('Booking could not get loaded');
     }
 
@@ -81,7 +77,7 @@ export async function getBookings(guestId: number) {
         .order('startDate');
 
     if (error) {
-        console.error(error);
+        process.env.NODE_ENV === 'development' && console.error(error);
         throw new Error('Bookings could not get loaded');
     }
 
@@ -107,7 +103,7 @@ export async function getBookedDatesByCabinId(cabinId: number) {
         .or(`startDate.gte.${today},status.eq.checked-in`);
 
     if (error) {
-        console.error(error);
+        process.env.NODE_ENV === 'development' && console.error(error);
         throw new Error('Bookings could not get loaded');
     }
 
@@ -132,7 +128,7 @@ export async function getSettings() {
         .single();
 
     if (error) {
-        console.error(error);
+        process.env.NODE_ENV === 'development' && console.error(error);
         throw new Error('Settings could not be loaded');
     }
 
@@ -155,7 +151,7 @@ export async function createGuest(newGuest: {}) {
     const { data, error } = await supabase.from('guests').insert([newGuest]);
 
     if (error) {
-        console.error(error);
+        process.env.NODE_ENV === 'development' && console.error(error);
         throw new Error('Guest could not be created');
     }
 
@@ -170,7 +166,7 @@ export async function createBooking(newBooking: {}) {
         .single();
 
     if (error) {
-        console.error(error);
+        process.env.NODE_ENV === 'development' && console.error(error);
         throw new Error('Booking could not be created');
     }
 
@@ -186,7 +182,7 @@ export async function updateGuest(id: number, updatedFields: {}) {
         .single();
 
     if (error) {
-        console.error(error);
+        process.env.NODE_ENV === 'development' && console.error(error);
         throw new Error('Guest could not be updated');
     }
     return data;
@@ -201,7 +197,7 @@ export async function updateBooking(id: number, updatedFields: {}) {
         .single();
 
     if (error) {
-        console.error(error);
+        process.env.NODE_ENV === 'development' && console.error(error);
         throw new Error('Booking could not be updated');
     }
     return data;
@@ -214,7 +210,7 @@ export async function deleteBooking(id: number) {
         .eq('id', id);
 
     if (error) {
-        console.error(error);
+        process.env.NODE_ENV === 'development' && console.error(error);
         throw new Error('Booking could not be deleted');
     }
     return data;
