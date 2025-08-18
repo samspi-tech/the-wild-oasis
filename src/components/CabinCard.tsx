@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { type Cabin } from '@/src/app/cabins/page';
 import { UsersIcon } from '@heroicons/react/24/solid';
+import { type Cabin } from '@/src/components/CabinList';
 
 type CabinCardProps = {
     cabin: Cabin;

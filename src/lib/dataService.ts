@@ -8,9 +8,6 @@ export async function getCabin(id: number) {
         .eq('id', id)
         .single();
 
-    // For testing
-    // await new Promise((res) => setTimeout(res, 1000));
-
     if (error && process.env.NODE_ENV === 'development') console.error(error);
 
     return data;
