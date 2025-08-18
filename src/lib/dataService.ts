@@ -1,7 +1,7 @@
 import { supabase } from './supabase';
 import { eachDayOfInterval } from 'date-fns';
 
-export async function getCabin(id: number) {
+export async function getCabin(id: string) {
     const { data, error } = await supabase
         .from('cabins')
         .select('*')
