@@ -10,7 +10,7 @@ type CabinPageProps = {
 };
 
 export default async function Page({ params }: CabinPageProps) {
-    const cabinId = params.cabinId;
+    const { cabinId } = params;
     const cabin: SingleCabin = await getCabin(cabinId);
 
     const {
