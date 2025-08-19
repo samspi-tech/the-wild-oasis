@@ -1,5 +1,6 @@
 import { supabase } from './supabase';
 import { Tables } from './database.types';
+import { notFound } from 'next/navigation';
 import { eachDayOfInterval } from 'date-fns';
 import { QueryData } from '@supabase/supabase-js';
 
@@ -12,7 +13,10 @@ export async function getCabin(id: number): Promise<Cabin | null> {
         .eq('id', id)
         .single();
 
-    if (error && process.env.NODE_ENV === 'development') console.error(error);
+    if (error) {
+        process.env.NODE_ENV === 'development' && console.error(error);
+        notFound();
+    }
 
     return data;
 }
