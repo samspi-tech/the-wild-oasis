@@ -1,8 +1,8 @@
 import { supabase } from './supabase';
-import { Tables } from './database.types';
 import { notFound } from 'next/navigation';
 import { eachDayOfInterval } from 'date-fns';
-import { QueryData } from '@supabase/supabase-js';
+import { type Tables } from './database.types';
+import { type QueryData } from '@supabase/supabase-js';
 
 export type Cabin = Tables<'cabins'>;
 
