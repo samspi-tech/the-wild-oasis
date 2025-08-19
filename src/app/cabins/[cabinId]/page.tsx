@@ -1,17 +1,26 @@
 import Image from 'next/image';
 import { getCabin } from '@/src/lib/dataService';
-import { type Cabin } from '@/src/components/CabinList';
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from '@heroicons/react/24/solid';
 
-type SingleCabin = Cabin & { description: string };
-
 type CabinPageProps = {
-    params: { cabinId: string };
+    params: { cabinId: number };
 };
+
+export async function generateMetadata({ params }: CabinPageProps) {
+    const { cabinId } = params;
+    const cabin = await getCabin(cabinId);
+
+    if (!cabin) return null;
+
+    const { name } = cabin;
+    return { title: `Cabin ${name}` };
+}
 
 export default async function Page({ params }: CabinPageProps) {
     const { cabinId } = params;
-    const cabin: SingleCabin = await getCabin(cabinId);
+    const cabin = await getCabin(cabinId);
+
+    if (!cabin) return null;
 
     const {
         id,
@@ -29,7 +38,7 @@ export default async function Page({ params }: CabinPageProps) {
                 <div className="relative hidden -translate-x-3 scale-[1.15] min-[926px]:block">
                     <Image
                         fill
-                        src={image}
+                        src={image!}
                         alt={`Cabin ${name}`}
                         className="object-cover"
                     />

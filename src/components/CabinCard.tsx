@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { type Cabins } from '../lib/dataService';
 import { UsersIcon } from '@heroicons/react/24/solid';
-import { type Cabin } from '@/src/components/CabinList';
 
 type CabinCardProps = {
-    cabin: Cabin;
+    cabin: Cabins[number];
 };
 
 export default function CabinCard({ cabin }: CabinCardProps) {
@@ -15,7 +15,7 @@ export default function CabinCard({ cabin }: CabinCardProps) {
             <header className="relative aspect-video flex-1">
                 <Image
                     fill
-                    src={image}
+                    src={image!}
                     alt={`Cabin ${name}`}
                     className="border-r border-primary-800 object-cover"
                 />
@@ -34,10 +34,10 @@ export default function CabinCard({ cabin }: CabinCardProps) {
                         </p>
                     </div>
                     <p className="flex items-baseline justify-end gap-3">
-                        {discount > 0 ? (
+                        {discount && discount > 0 ? (
                             <>
                                 <span className="text-3xl font-[350]">
-                                    ${regularPrice - discount}
+                                    ${regularPrice! - discount}
                                 </span>
                                 <span className="font-semibold text-primary-600 line-through">
                                     ${regularPrice}

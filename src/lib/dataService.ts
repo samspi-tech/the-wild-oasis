@@ -1,7 +1,11 @@
 import { supabase } from './supabase';
+import { Tables } from './database.types';
 import { eachDayOfInterval } from 'date-fns';
+import { QueryData } from '@supabase/supabase-js';
 
-export async function getCabin(id: string) {
+export type Cabin = Tables<'cabins'>;
+
+export async function getCabin(id: number): Promise<Cabin | null> {
     const { data, error } = await supabase
         .from('cabins')
         .select('*')
@@ -11,6 +15,26 @@ export async function getCabin(id: string) {
     if (error && process.env.NODE_ENV === 'development') console.error(error);
 
     return data;
+}
+
+const cabinsQuery = supabase
+    .from('cabins')
+    .select('id, name, maxCapacity, regularPrice, discount, image')
+    .order('name');
+
+export type Cabins = QueryData<typeof cabinsQuery>;
+
+export async function getCabins() {
+    const { data, error } = await cabinsQuery;
+
+    if (error) {
+        process.env.NODE_ENV === 'development' && console.error(error);
+        throw new Error('Cabins could not be loaded');
+    }
+
+    const cabins: Cabins = data;
+
+    return cabins;
 }
 
 export async function getCabinPrice(id: number) {
@@ -24,20 +48,6 @@ export async function getCabinPrice(id: number) {
 
     return data;
 }
-
-export const getCabins = async function () {
-    const { data, error } = await supabase
-        .from('cabins')
-        .select('id, name, maxCapacity, regularPrice, discount, image')
-        .order('name');
-
-    if (error) {
-        process.env.NODE_ENV === 'development' && console.error(error);
-        throw new Error('Cabins could not be loaded');
-    }
-
-    return data;
-};
 
 export async function getGuest(email: string) {
     const { data, error } = await supabase
@@ -81,41 +91,40 @@ export async function getBookings(guestId: number) {
     return data;
 }
 
-type Today = Date | string;
-
-type Booking = {
-    endDate: string;
-    startDate: string;
-};
-
 export async function getBookedDatesByCabinId(cabinId: number) {
+    type Today = string | Date;
+
     let today: Today = new Date();
     today.setUTCHours(0, 0, 0, 0);
     today = today.toISOString();
 
-    const { data, error } = await supabase
+    const bookingsQuery = supabase
         .from('bookings')
-        .select('*')
+        .select('startDate, endDate')
         .eq('cabinId', cabinId)
         .or(`startDate.gte.${today},status.eq.checked-in`);
+
+    type BookingDates = QueryData<typeof bookingsQuery>;
+
+    const { data, error } = await bookingsQuery;
 
     if (error) {
         process.env.NODE_ENV === 'development' && console.error(error);
         throw new Error('Bookings could not get loaded');
     }
 
-    const bookedDates = data
-        .map((booking: Booking) => {
+    const bookedDates: BookingDates = data;
+
+    return bookedDates
+        .map((booking) => {
             const { startDate, endDate } = booking;
 
             return eachDayOfInterval({
-                start: new Date(startDate),
-                end: new Date(endDate),
+                start: new Date(startDate!),
+                end: new Date(endDate!),
             });
         })
         .flat();
-
-    return bookedDates;
 }
 
 export async function getSettings() {

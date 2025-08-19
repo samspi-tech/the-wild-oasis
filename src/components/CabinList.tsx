@@ -1,17 +1,8 @@
 import { getCabins } from '@/src/lib/dataService';
 import CabinCard from '@/src/components/CabinCard';
 
-export type Cabin = {
-    id: number;
-    name: string;
-    image: string;
-    discount: number;
-    maxCapacity: number;
-    regularPrice: number;
-};
-
 export default async function CabinList() {
-    const cabins: Cabin[] = await getCabins();
+    const cabins = await getCabins();
 
     if (!cabins.length) return null;
 
