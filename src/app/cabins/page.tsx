@@ -2,6 +2,9 @@ import { Suspense } from 'react';
 import Spinner from '@/src/components/UI/Spinner';
 import CabinList from '@/src/components/CabinList';
 
+const HOUR_IN_SECONDS = 3600;
+export const revalidate = HOUR_IN_SECONDS;
+
 export const metadata = {
     title: 'Cabins',
 };
