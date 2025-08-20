@@ -1,5 +1,9 @@
+import {
+    getAllCabins,
+    getSingleCabin,
+} from '@/src/lib/dataService/cabin.service';
+
 import Image from 'next/image';
-import { getCabin, getCabins } from '@/src/lib/dataService';
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from '@heroicons/react/24/solid';
 
 type CabinPageProps = {
@@ -8,7 +12,7 @@ type CabinPageProps = {
 
 export async function generateMetadata({ params }: CabinPageProps) {
     const { cabinId } = params;
-    const cabin = await getCabin(cabinId);
+    const cabin = await getSingleCabin(cabinId);
 
     if (!cabin) return null;
 
@@ -17,7 +21,7 @@ export async function generateMetadata({ params }: CabinPageProps) {
 }
 
 export async function generateStaticParams() {
-    const cabins = await getCabins();
+    const cabins = await getAllCabins();
 
     const ids = cabins.map((cabin) => ({
         cabinId: String(cabin.id),
@@ -28,7 +32,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: CabinPageProps) {
     const { cabinId } = params;
-    const cabin = await getCabin(cabinId);
+    const cabin = await getSingleCabin(cabinId);
 
     if (!cabin) return null;
 

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { type Cabins } from '../lib/dataService';
 import { UsersIcon } from '@heroicons/react/24/solid';
+import { type Cabins } from '@/src/lib/dataService/cabin.service';
 
 type CabinCardProps = {
     cabin: Cabins[number];

@@ -1,9 +1,4 @@
-import { getCountries } from '@/src/lib/dataService';
-
-type Country = {
-    name: string;
-    flag: string;
-};
+import { getAllCountries } from '@/src/lib/dataService/contry.service';
 
 type SelectCountryProps = {
     id: string;
@@ -18,7 +13,7 @@ export default async function SelectCountry({
     className,
     defaultCountry,
 }: SelectCountryProps) {
-    const countries: Country[] = await getCountries();
+    const countries = await getAllCountries();
 
     const flag =
         countries.find((country) => {
