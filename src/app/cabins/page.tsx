@@ -1,15 +1,19 @@
 import { Suspense } from 'react';
 import Spinner from '@/src/components/UI/Spinner';
 import CabinList from '@/src/components/CabinList';
-
-const HOUR_IN_SECONDS = 3600;
-export const revalidate = HOUR_IN_SECONDS;
+import CabinFilter from '@/src/components/cabinFilter/CabinFilter';
 
 export const metadata = {
     title: 'Cabins',
 };
 
-export default function Page() {
+type CabinPageProps = {
+    searchParams: { capacity: string } | undefined;
+};
+
+export default function Page({ searchParams }: CabinPageProps) {
+    const filter = searchParams?.capacity ?? 'all';
+
     return (
         <section>
             <h1 className="mb-5 text-4xl font-medium text-accent-400">
@@ -23,8 +27,9 @@ export default function Page() {
                 nature's beauty in your own little home away from home. The
                 perfect spot for a peaceful, calm vacation. Welcome to paradise.
             </p>
-            <Suspense fallback={<Spinner />}>
-                <CabinList />
+            <CabinFilter />
+            <Suspense fallback={<Spinner />} key={filter}>
+                <CabinList filter={filter} />
             </Suspense>
         </section>
     );

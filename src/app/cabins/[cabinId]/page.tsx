@@ -3,7 +3,7 @@ import {
     getSingleCabin,
 } from '@/src/lib/dataService/cabin.service';
 import Image from 'next/image';
-import TextExpander from '@/src/components/TextExpander';
+import TextExpander from '@/src/components/UI/TextExpander';
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from '@heroicons/react/24/solid';
 
 type CabinPageProps = {
