@@ -1,24 +1,6 @@
 import CabinCard from '@/src/components/CabinCard';
-import { type Cabins, getAllCabins } from '@/src/lib/dataService/cabin.service';
-
-function filterCabins(filter: string, cabins: Cabins) {
-    switch (true) {
-        case filter === 'small': {
-            return cabins.filter(({ maxCapacity }) => maxCapacity! <= 3);
-        }
-        case filter === 'medium': {
-            return cabins.filter(
-                ({ maxCapacity }) => maxCapacity! >= 4 && maxCapacity! <= 7,
-            );
-        }
-        case filter === 'large': {
-            return cabins.filter(({ maxCapacity }) => maxCapacity! >= 8);
-        }
-        default: {
-            return cabins;
-        }
-    }
-}
+import { filterCabins } from '@/src/utils/filterCabins';
+import { getAllCabins } from '@/src/lib/dataService/cabin.service';
 
 type CabinListProps = {
     filter: string;
