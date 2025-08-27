@@ -2,8 +2,7 @@ import {
     ChevronDoubleRightIcon,
     ChevronDoubleLeftIcon,
 } from '@heroicons/react/24/solid';
-
-import { type SideNavProps } from '../sideNavigation/SideNavigation';
+import { type SideNavProps } from '@/src/components/sideNavigation/SideNavigation';
 
 export default function SideNavToggleButton({
     onToggle,

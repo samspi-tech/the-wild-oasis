@@ -1,5 +1,5 @@
 import SelectCountry from '@/src/components/UI/SelectCountry';
-import UpdateProfileForm from '@/src/components/UpdateProfileForm';
+import UpdateProfileForm from '@/src/components/updateProfileForm/UpdateProfileForm';
 
 export const metadata = {
     title: 'Update profile',

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { navLinks } from './dataSource';
 import { usePathname } from 'next/navigation';
-import SignOutButton from '@/src/components/UI/SignOutButton';
+import SignOutButton from './partials/SignOutButton';
 
 export type SideNavProps = {
     isVisible: boolean;

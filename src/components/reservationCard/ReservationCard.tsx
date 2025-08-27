@@ -1,7 +1,7 @@
 import Link from 'next/link';
+import DeleteReservation from './partials/DeleteReservation';
 import { PencilSquareIcon } from '@heroicons/react/24/solid';
 import { type Booking } from '@/src/app/account/reservations/page';
-import DeleteReservation from '@/src/components/UI/DeleteReservation';
 import { format, formatDistance, isPast, isToday, parseISO } from 'date-fns';
 
 export const formatDistanceFromNow = (dateStr: string) =>

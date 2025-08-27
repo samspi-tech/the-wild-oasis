@@ -12,7 +12,7 @@ export default function CabinCard({ cabin }: CabinCardProps) {
 
     return (
         <article className="flex flex-col border border-primary-800 xl:flex-row">
-            <header className="relative aspect-video flex-1">
+            <header className="relative flex-1">
                 <Image
                     fill
                     src={image!}

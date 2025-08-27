@@ -1,4 +1,4 @@
-import CabinCard from '@/src/components/CabinCard';
+import CabinCard from './partials/CabinCard';
 import { filterCabins } from '@/src/utils/filterCabins';
 import { getAllCabins } from '@/src/lib/dataService/cabin.service';
 

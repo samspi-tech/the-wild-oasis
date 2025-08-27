@@ -1,8 +1,8 @@
 'use client';
 
 import { cabinFilters } from './dataSource';
+import CabinFilterButton from './partials/CabinFilterButton';
 import { createQueryString } from '@/src/utils/createQueryString';
-import CabinFilterButton from '@/src/components/UI/CabinFilterButton';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 export default function CabinFilter() {

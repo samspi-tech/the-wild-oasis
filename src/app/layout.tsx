@@ -1,7 +1,7 @@
 import '@/src/styles/globals.css';
 import { type ReactNode } from 'react';
-import Header from '@/src/components/Header';
 import { Josefin_Sans } from 'next/font/google';
+import Header from '@/src/components/header/Header';
 
 export const metadata = {
     title: {
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps) {
                 className={`${josefinFont.className} relative flex min-h-screen flex-col bg-primary-950 text-primary-100 antialiased`}
             >
                 <Header />
-                <div className="grid flex-1 px-8 py-12">
+                <div className="grid flex-1 px-1 py-12 max-[352px]:px-0 md:px-8">
                     <main className="mx-auto w-full max-w-7xl">{children}</main>
                 </div>
             </body>
