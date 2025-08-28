@@ -2,6 +2,7 @@ import '@/src/styles/globals.css';
 import { type ReactNode } from 'react';
 import { Josefin_Sans } from 'next/font/google';
 import Header from '@/src/components/header/Header';
+import { ReservationProvider } from '../contexts/ReservationContext';
 
 export const metadata = {
     title: {
@@ -29,7 +30,9 @@ export default function RootLayout({ children }: LayoutProps) {
             >
                 <Header />
                 <div className="grid flex-1 px-1 py-12 max-[352px]:px-0 md:px-8">
-                    <main className="mx-auto w-full max-w-7xl">{children}</main>
+                    <main className="mx-auto w-full max-w-7xl">
+                        <ReservationProvider>{children}</ReservationProvider>
+                    </main>
                 </div>
             </body>
         </html>

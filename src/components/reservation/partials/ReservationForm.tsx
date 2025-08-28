@@ -1,4 +1,7 @@
+'use client';
+
 import { type Cabin } from '@/src/lib/dataService/cabin.service';
+import { useReservationContenxt } from '@/src/hooks/useReservationContext';
 
 type ReservationFormProps = {
     cabin: Cabin;
@@ -6,6 +9,8 @@ type ReservationFormProps = {
 
 export default function ReservationForm({ cabin }: ReservationFormProps) {
     const { maxCapacity } = cabin;
+
+    const { range } = useReservationContenxt();
 
     return (
         <div className="scale-[1.01]">

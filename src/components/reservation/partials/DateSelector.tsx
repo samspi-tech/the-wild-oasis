@@ -5,6 +5,9 @@ import { isWithinInterval } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import { type Cabin } from '@/src/lib/dataService/cabin.service';
 import { type Settings } from '@/src/lib/dataService/booking.service';
+import { useContext } from 'react';
+import { ReservationContext } from '@/src/contexts/ReservationContext';
+import { useReservationContenxt } from '@/src/hooks/useReservationContext';
 
 // function isAlreadyBooked(range, datesArr) {
 //     return (
@@ -19,7 +22,7 @@ import { type Settings } from '@/src/lib/dataService/booking.service';
 //     );
 // }
 
-type DataSelectorProps = {
+type DateSelectorProps = {
     cabin: Cabin;
     bookedDates: Date[];
     bookingSettings: Settings;
@@ -29,16 +32,14 @@ export default function DateSelector({
     cabin,
     bookedDates,
     bookingSettings,
-}: DataSelectorProps) {
+}: DateSelectorProps) {
+    const { range, setRange, resetRange } = useReservationContenxt();
+
     // CHANGE
     const discount = 23;
     const numNights = 23;
     const cabinPrice = 23;
     const regularPrice = 23;
-    const range = {
-        from: null,
-        to: null,
-    };
 
     const { minBookingLength, maxBookingLength } = bookingSettings;
 
@@ -50,6 +51,8 @@ export default function DateSelector({
         <div className="flex flex-col justify-between">
             <DayPicker
                 mode="range"
+                selected={range}
+                onSelect={setRange}
                 max={maxBookingLength!}
                 captionLayout="dropdown"
                 min={minBookingLength! + 1}
@@ -91,10 +94,10 @@ export default function DateSelector({
                         </>
                     ) : null}
                 </div>
-                {range.from || range.to ? (
+                {range?.from || range?.to ? (
                     <button
+                        onClick={resetRange}
                         className="border border-primary-800 px-4 py-2 text-sm font-semibold"
-                        // onClick={() => resetRange()}
                     >
                         Clear
                     </button>
