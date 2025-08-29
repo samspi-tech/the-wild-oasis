@@ -6,7 +6,6 @@ import { Suspense } from 'react';
 import Spinner from '@/src/components/UI/Spinner';
 import Reservation from '@/src/components/reservation/Reservation';
 import SingleCabin from '@/src/components/singleCabin/SingleCabin';
-import { convertStringToNumber } from '@/src/utils/convertStringToNumber';
 
 export type Params = {
     params: { cabinId: string };
@@ -14,7 +13,7 @@ export type Params = {
 
 export async function generateMetadata({ params }: Params) {
     const { cabinId } = params;
-    const id = convertStringToNumber(cabinId);
+    const id = Number(cabinId);
 
     const cabin = await getSingleCabin(id);
 
@@ -36,7 +35,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: Params) {
     const { cabinId } = params;
-    const id = convertStringToNumber(cabinId);
+    const id = Number(cabinId);
 
     const cabin = await getSingleCabin(id);
 
