@@ -1,9 +1,6 @@
+import { type Params } from '@/src/app/cabins/[cabinId]/page';
 import { getSingleCabin } from '@/src/lib/dataService/cabin.service';
 import { getBookedDatesByCabinId } from '@/src/lib/dataService/booking.service';
-
-type Params = {
-    params: { cabinId: string };
-};
 
 export async function GET(request: Request, { params }: Params) {
     const { cabinId } = params;

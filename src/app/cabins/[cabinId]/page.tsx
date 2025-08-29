@@ -8,11 +8,11 @@ import Reservation from '@/src/components/reservation/Reservation';
 import SingleCabin from '@/src/components/singleCabin/SingleCabin';
 import { convertStringToNumber } from '@/src/utils/convertStringToNumber';
 
-type CabinPageProps = {
+export type Params = {
     params: { cabinId: string };
 };
 
-export async function generateMetadata({ params }: CabinPageProps) {
+export async function generateMetadata({ params }: Params) {
     const { cabinId } = params;
     const id = convertStringToNumber(cabinId);
 
@@ -34,7 +34,7 @@ export async function generateStaticParams() {
     return ids;
 }
 
-export default async function Page({ params }: CabinPageProps) {
+export default async function Page({ params }: Params) {
     const { cabinId } = params;
     const id = convertStringToNumber(cabinId);
 
