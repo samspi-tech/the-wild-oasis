@@ -5,9 +5,15 @@ import { useReservationContenxt } from '@/src/hooks/useReservationContext';
 
 type ReservationFormProps = {
     cabin: Cabin;
+    user: {
+        id?: string | undefined;
+        name?: string | null | undefined;
+        email?: string | null | undefined;
+        image?: string | null | undefined;
+    };
 };
 
-export default function ReservationForm({ cabin }: ReservationFormProps) {
+export default function ReservationForm({ cabin, user }: ReservationFormProps) {
     const { maxCapacity } = cabin;
 
     const { range } = useReservationContenxt();
@@ -16,16 +22,15 @@ export default function ReservationForm({ cabin }: ReservationFormProps) {
         <div className="scale-[1.01]">
             <div className="flex items-center justify-between bg-primary-800 px-16 py-2 text-primary-300">
                 <p>Logged in as</p>
-                {/* <div className='flex gap-4 items-center'>
-          <img
-            // Important to display google profile images
-            referrerPolicy='no-referrer'
-            className='h-8 rounded-full'
-            src={user.image}
-            alt={user.name}
-          />
-          <p>{user.name}</p>
-        </div> */}
+                <div className="flex items-center gap-4">
+                    <img
+                        alt={user.name!}
+                        src={user.image!}
+                        referrerPolicy="no-referrer"
+                        className="h-8 rounded-full"
+                    />
+                    <p>{user.name}</p>
+                </div>
             </div>
             <form className="flex flex-col gap-5 bg-primary-900 px-16 py-10 text-lg">
                 <div className="space-y-2">

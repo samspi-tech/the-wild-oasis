@@ -9,9 +9,4 @@ export const navLinks = [
         name: 'About',
         href: '/about',
     },
-    {
-        id: 'nav-link-3',
-        name: 'Guest area',
-        href: '/account',
-    },
 ];
