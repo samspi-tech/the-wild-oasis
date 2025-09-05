@@ -3,8 +3,8 @@
 import 'react-day-picker/dist/style.css';
 import { isWithinInterval } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
-import { type Cabin } from '@/src/lib/dataService/cabin.service';
-import { type Settings } from '@/src/lib/dataService/booking.service';
+import { type Cabin } from '@/src/lib/supabase/dataService/cabin.service';
+import { type Settings } from '@/src/lib/supabase/dataService/booking.service';
 import { useContext } from 'react';
 import { ReservationContext } from '@/src/contexts/ReservationContext';
 import { useReservationContenxt } from '@/src/hooks/useReservationContext';

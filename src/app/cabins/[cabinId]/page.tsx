@@ -1,7 +1,7 @@
 import {
     getAllCabins,
     getSingleCabin,
-} from '@/src/lib/dataService/cabin.service';
+} from '@/src/lib/supabase/dataService/cabin.service';
 import { Suspense } from 'react';
 import Spinner from '@/src/components/UI/Spinner';
 import Reservation from '@/src/components/reservation/Reservation';

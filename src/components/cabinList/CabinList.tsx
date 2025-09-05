@@ -1,6 +1,6 @@
 import CabinCard from './partials/CabinCard';
 import { filterCabins } from '@/src/utils/filterCabins';
-import { getAllCabins } from '@/src/lib/dataService/cabin.service';
+import { getAllCabins } from '@/src/lib/supabase/dataService/cabin.service';
 
 type CabinListProps = {
     filter: string;

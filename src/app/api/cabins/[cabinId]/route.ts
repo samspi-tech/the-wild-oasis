@@ -1,6 +1,6 @@
 import { type Params } from '@/src/app/cabins/[cabinId]/page';
-import { getSingleCabin } from '@/src/lib/dataService/cabin.service';
-import { getBookedDatesByCabinId } from '@/src/lib/dataService/booking.service';
+import { getSingleCabin } from '@/src/lib/supabase/dataService/cabin.service';
+import { getBookedDatesByCabinId } from '@/src/lib/supabase/dataService/booking.service';
 
 export async function GET(request: Request, { params }: Params) {
     const { cabinId } = params;

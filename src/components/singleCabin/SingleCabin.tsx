@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import TextExpander from './partials/TextExpander';
-import { type Cabin } from '@/src/lib/dataService/cabin.service';
+import { type Cabin } from '@/src/lib/supabase/dataService/cabin.service';
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from '@heroicons/react/24/solid';
 
 type SingleCabinProps = {

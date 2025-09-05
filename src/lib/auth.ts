@@ -1,5 +1,9 @@
-import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
+import NextAuth, { type Session } from 'next-auth';
+
+type Auth = {
+    auth: Session | null;
+};
 
 const authConfig = {
     providers: [
@@ -8,11 +12,14 @@ const authConfig = {
             clientSecret: process.env.AUTH_GOOGLE_SECRET,
         }),
     ],
+    callbacks: {
+        authorized: async ({ auth }: Auth) => {
+            return !!auth;
+        },
+    },
 };
 
 export const {
     auth,
-    signIn,
-    signOut,
     handlers: { GET, POST },
 } = NextAuth(authConfig);

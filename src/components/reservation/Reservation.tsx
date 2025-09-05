@@ -1,12 +1,12 @@
 import {
     getBookingSettings,
     getBookedDatesByCabinId,
-} from '@/src/lib/dataService/booking.service';
+} from '@/src/lib/supabase/dataService/booking.service';
 import { auth } from '@/src/lib/auth';
 import LoginMessage from './partials/LoginMessage';
 import DateSelector from './partials/DateSelector';
 import ReservationForm from './partials/ReservationForm';
-import { type Cabin } from '@/src/lib/dataService/cabin.service';
+import { type Cabin } from '@/src/lib/supabase/dataService/cabin.service';
 
 type ReservationProps = {
     cabin: Cabin;

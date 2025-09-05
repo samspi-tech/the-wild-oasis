@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import aboutImageOne from '@/public/about-1.jpg';
 import aboutImageTwo from '@/public/about-2.jpg';
-import { getAllCabins } from '@/src/lib/dataService/cabin.service';
+import { getAllCabins } from '@/src/lib/supabase/dataService/cabin.service';
 
 const DAY_IN_SECONDS = 86400;
 export const revalidate = DAY_IN_SECONDS;

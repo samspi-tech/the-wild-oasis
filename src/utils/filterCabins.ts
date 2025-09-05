@@ -1,4 +1,4 @@
-import { type Cabins } from '../lib/dataService/cabin.service';
+import { type Cabins } from '../lib/supabase/dataService/cabin.service';
 
 export function filterCabins(filter: string, cabins: Cabins) {
     switch (true) {

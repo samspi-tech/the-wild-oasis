@@ -1,6 +1,6 @@
 'use client';
 
-import { type Cabin } from '@/src/lib/dataService/cabin.service';
+import { type Cabin } from '@/src/lib/supabase/dataService/cabin.service';
 import { useReservationContenxt } from '@/src/hooks/useReservationContext';
 
 type ReservationFormProps = {

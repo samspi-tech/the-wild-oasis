@@ -1,4 +1,4 @@
-import { getAllCountries } from '@/src/lib/dataService/country.service';
+import { getAllCountries } from '@/src/lib/supabase/dataService/country.service';
 
 type SelectCountryProps = {
     id: string;
