@@ -26,7 +26,7 @@ const authConfig = {
         authorized: async ({ auth }: Auth) => {
             return !!auth;
         },
-        signIn: async ({ user }: { user: GuestUser }) => {
+        signIn: async ({ user }: { user: User }) => {
             try {
                 const { email, name: fullName } = user;
                 const existingGuest = await getGuest(email);
@@ -39,8 +39,8 @@ const authConfig = {
             }
         },
         session: async ({ session }: GuestSession) => {
-            const guestEmail = session?.user?.email;
-            const guest = await getGuest(guestEmail);
+            const email = session?.user?.email;
+            const guest = await getGuest(email);
 
             session!.user!.guestId = guest?.id;
 
