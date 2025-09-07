@@ -1,16 +1,12 @@
 'use client';
 
+import { type User } from 'next-auth';
 import { type Cabin } from '@/src/lib/supabase/dataService/cabin.service';
 import { useReservationContenxt } from '@/src/hooks/useReservationContext';
 
 type ReservationFormProps = {
+    user: User;
     cabin: Cabin;
-    user: {
-        id?: string | undefined;
-        name?: string | null | undefined;
-        email?: string | null | undefined;
-        image?: string | null | undefined;
-    };
 };
 
 export default function ReservationForm({ cabin, user }: ReservationFormProps) {
