@@ -2,14 +2,12 @@ import { getAllCountries } from '@/src/lib/supabase/dataService/country.service'
 
 type SelectCountryProps = {
     id: string;
-    name: string;
     className: string;
     defaultCountry: string;
 };
 
 export default async function SelectCountry({
     id,
-    name,
     className,
     defaultCountry,
 }: SelectCountryProps) {
@@ -23,7 +21,7 @@ export default async function SelectCountry({
     return (
         <select
             id={id}
-            name={name}
+            name={id}
             className={className}
             defaultValue={`${defaultCountry}%${flag}`}
         >

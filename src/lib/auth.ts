@@ -1,18 +1,29 @@
+import NextAuth, {
+    type User,
+    type Session,
+    type DefaultSession,
+} from 'next-auth';
 import Google from 'next-auth/providers/google';
-import NextAuth, { type User, type Session } from 'next-auth';
 import { createGuest, getGuest } from './supabase/dataService/guest.service';
 
-type GuestUser = User & { guestId?: number | undefined };
-
-type GuestSession = {
-    session: {
-        user?: GuestUser | undefined;
-        expires: string;
-    };
-};
+declare module 'next-auth' {
+    interface Session {
+        user: {
+            guestId: number | undefined;
+        } & DefaultSession['user'];
+    }
+}
 
 type Auth = {
     auth: Session | null;
+};
+
+type GuestUser = {
+    user: User;
+};
+
+type GuestSession = {
+    session: Session;
 };
 
 const authConfig = {
@@ -26,7 +37,7 @@ const authConfig = {
         authorized: async ({ auth }: Auth) => {
             return !!auth;
         },
-        signIn: async ({ user }: { user: User }) => {
+        signIn: async ({ user }: GuestUser) => {
             try {
                 const { email, name: fullName } = user;
                 const existingGuest = await getGuest(email);
@@ -42,7 +53,7 @@ const authConfig = {
             const email = session?.user?.email;
             const guest = await getGuest(email);
 
-            session!.user!.guestId = guest?.id;
+            session!.user.guestId = guest?.id;
 
             return session;
         },
