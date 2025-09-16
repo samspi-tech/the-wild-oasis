@@ -1,5 +1,6 @@
 import { supabase } from '../supabase';
 import { eachDayOfInterval } from 'date-fns';
+import { type GuestId } from './guest.service';
 import { type Tables } from '../database.types';
 import { type QueryData } from '@supabase/supabase-js';
 
@@ -45,4 +46,23 @@ export async function getBookingSettings(): Promise<Settings> {
     if (error) throw new Error('Settings could not be loaded');
 
     return data;
+}
+
+const allBookingsQuery = supabase
+    .from('bookings')
+    .select(
+        'id, created_at, startDate, endDate, numNights, numGuests, totalPrice, guestId, cabinId, cabins(name, image)',
+    );
+
+export type Bookings = QueryData<typeof allBookingsQuery>;
+
+export async function getAllBookings(guestId: GuestId) {
+    const { data, error, count } = await allBookingsQuery
+        .eq('guestId', guestId!)
+        .order('startDate');
+
+    if (error) throw new Error('Bookings could not get loaded');
+
+    const bookings: Bookings = data;
+    return bookings;
 }

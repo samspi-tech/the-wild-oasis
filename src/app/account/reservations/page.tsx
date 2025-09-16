@@ -1,28 +1,16 @@
+import { auth } from '@/src/lib/auth';
 import ReservationCard from '@/src/components/reservationCard/ReservationCard';
+import { getAllBookings } from '@/src/lib/supabase/dataService/booking.service';
 
 export const metadata = {
     title: 'Reservations',
 };
 
-export type Booking = {
-    id: number;
-    status: string;
-    endDate: string;
-    guestId: number;
-    startDate: string;
-    numNights: number;
-    numGuests: number;
-    totalPrice: number;
-    created_at: string;
-    cabins: {
-        name: string;
-        image: string;
-    };
-};
+export default async function Page() {
+    const session = await auth();
+    const id = session?.user.guestId;
 
-export default function Page() {
-    // CHANGE
-    const bookings: Booking[] = [];
+    const bookings = await getAllBookings(id);
 
     return (
         <div>

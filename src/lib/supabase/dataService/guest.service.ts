@@ -28,7 +28,7 @@ export async function createGuest(newGuest: NewGuest) {
     return data;
 }
 
-type GuestId = number | undefined;
+export type GuestId = number | undefined;
 
 type UpdatedFields = {
     nationalID: string;
