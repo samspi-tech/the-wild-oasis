@@ -1,7 +1,8 @@
-import { getSession } from './getSession';
+import { auth } from '../lib/auth';
 
 export async function getGuestId() {
-    const session = await getSession();
+    const session = await auth();
+    if (!session) throw new Error('You must be logged in');
 
     return session.user.guestId;
 }

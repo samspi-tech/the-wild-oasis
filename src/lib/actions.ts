@@ -2,7 +2,6 @@
 
 import { signIn, signOut } from './auth';
 import { revalidatePath } from 'next/cache';
-import { getSession } from '../utils/getSession';
 import { updateGuest } from './supabase/dataService/guest.service';
 import { deleteBooking } from './supabase/dataService/booking.service';
 import { getGuestId, getUpdateData } from '../utils/guestProfileUpdate';
@@ -25,8 +24,7 @@ export async function updateGuestProfile(formData: FormData) {
 }
 
 export async function deleteReservation(bookingId: number) {
-    const session = await getSession();
-    const guestId = session.user.guestId;
+    const guestId = await getGuestId();
 
     await checkDeleteBookingPermission(guestId, bookingId);
 
