@@ -1,5 +1,5 @@
 import { auth } from '@/src/lib/auth';
-import ReservationCard from '@/src/components/reservationCard/ReservationCard';
+import ReservationList from '@/src/components/reservationList/ReservationList';
 import { getAllBookings } from '@/src/lib/supabase/dataService/booking.service';
 
 export const metadata = {
@@ -26,11 +26,7 @@ export default async function Page() {
                     </a>
                 </p>
             ) : (
-                <ul className="space-y-6">
-                    {bookings.map((booking) => (
-                        <ReservationCard booking={booking} key={booking.id} />
-                    ))}
-                </ul>
+                <ReservationList bookings={bookings} />
             )}
         </div>
     );

@@ -8,9 +8,13 @@ import { type Bookings } from '@/src/lib/supabase/dataService/booking.service';
 
 type ReservationCardProps = {
     booking: Bookings[number];
+    onDelete: (bookingId: number) => void;
 };
 
-export default function ReservationCard({ booking }: ReservationCardProps) {
+export default function ReservationCard({
+    booking,
+    onDelete,
+}: ReservationCardProps) {
     const {
         id,
         cabins,
@@ -77,7 +81,7 @@ export default function ReservationCard({ booking }: ReservationCardProps) {
                         <PencilSquareIcon className="h-5 w-5 text-primary-600 transition-colors group-hover:text-primary-800" />
                         <span className="mt-1 max-[630px]:p-5">Edit</span>
                     </Link>
-                    <DeleteReservation bookingId={id} />
+                    <DeleteReservation onDelete={onDelete} bookingId={id} />
                 </footer>
             ) : null}
         </article>
