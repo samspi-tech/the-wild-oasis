@@ -1,13 +1,13 @@
 'use client';
 
-import Submit from './partials/Submit';
 import { type ReactNode } from 'react';
+import SubmitButton from '../UI/SubmitButton';
 import { updateGuestProfile } from '@/src/lib/actions';
 import { type Guests } from '@/src/lib/supabase/dataService/guest.service';
 
 type UpdateProfileFormProps = {
-    guest: Guests | null;
     children: ReactNode;
+    guest: Guests | null;
 };
 
 export default function UpdateProfileForm({
@@ -58,9 +58,7 @@ export default function UpdateProfileForm({
                     className="w-full rounded-sm bg-primary-200 px-5 py-3 text-primary-800 shadow-sm"
                 />
             </div>
-            <div className="flex items-center justify-end gap-6">
-                <Submit />
-            </div>
+            <SubmitButton text="Update profile" />
         </form>
     );
 }

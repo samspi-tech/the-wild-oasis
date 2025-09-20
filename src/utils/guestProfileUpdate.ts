@@ -11,7 +11,7 @@ function testNationalID(nationalID: string) {
     return /^[a-zA-Z0-9]{6,12}$/.test(nationalID);
 }
 
-export function getUpdateData(formData: FormData) {
+export function getGuestUpdateData(formData: FormData) {
     const nationalID = <string>formData.get('nationalID');
 
     const [nationality, countryFlag] = (<string>(

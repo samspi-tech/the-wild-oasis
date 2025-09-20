@@ -57,7 +57,7 @@ const allBookingsQuery = supabase
 export type Bookings = QueryData<typeof allBookingsQuery>;
 
 export async function getAllBookings(guestId: GuestId) {
-    const { data, error, count } = await allBookingsQuery
+    const { data, error } = await allBookingsQuery
         .eq('guestId', guestId!)
         .order('startDate');
 
@@ -65,6 +65,34 @@ export async function getAllBookings(guestId: GuestId) {
 
     const bookings: Bookings = data;
     return bookings;
+}
+
+export type SingleBooking = Tables<'bookings'>;
+
+export async function getSingleBooking(id: number) {
+    const { data, error } = await supabase
+        .from('bookings')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+    if (error) throw new Error('Booking could not get loaded');
+
+    return data;
+}
+
+type UpdatedFields = {
+    numGuests: number;
+    observations: string;
+};
+
+export async function updateBooking(id: number, updatedFields: UpdatedFields) {
+    const { error } = await supabase
+        .from('bookings')
+        .update(updatedFields)
+        .eq('id', id);
+
+    if (error) throw new Error('Booking could not be updated');
 }
 
 export async function deleteBooking(id: number) {

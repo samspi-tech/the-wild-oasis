@@ -1,7 +1,7 @@
 import { type GuestId } from '../lib/supabase/dataService/guest.service';
 import { getAllBookings } from '../lib/supabase/dataService/booking.service';
 
-export async function checkDeleteBookingPermission(
+export async function checkBookingActionPermission(
     guestId: GuestId,
     bookingId: number,
 ) {
@@ -9,6 +9,6 @@ export async function checkDeleteBookingPermission(
     const guestBookingsIds = guestBookings.map(({ id }) => id);
 
     if (!guestBookingsIds.includes(bookingId)) {
-        throw new Error('You are not allowed to delete this booking');
+        throw new Error('You are not allowed to perform this action');
     }
 }

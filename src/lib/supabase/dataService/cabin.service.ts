@@ -5,11 +5,13 @@ import { type QueryData } from '@supabase/supabase-js';
 
 export type Cabin = Tables<'cabins'>;
 
-export async function getSingleCabin(id: number): Promise<Cabin | null> {
+type CabinId = number | null;
+
+export async function getSingleCabin(id: CabinId): Promise<Cabin | null> {
     const { data, error } = await supabase
         .from('cabins')
         .select('*')
-        .eq('id', id)
+        .eq('id', id!)
         .single();
 
     if (error) notFound();
