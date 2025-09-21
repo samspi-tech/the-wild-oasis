@@ -19,7 +19,6 @@ export default async function Reservation({ cabin }: ReservationProps) {
         getBookingSettings(),
         getBookedDatesByCabinId(id),
     ]);
-
     const session = await auth();
 
     return (

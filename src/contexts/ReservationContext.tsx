@@ -9,7 +9,7 @@ import {
 } from 'react';
 import { type DateRange } from 'react-day-picker';
 
-type Range = DateRange | undefined;
+export type Range = DateRange | undefined;
 
 type ReservationContextValues = {
     range: Range;

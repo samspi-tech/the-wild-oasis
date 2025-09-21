@@ -1,30 +1,19 @@
 'use client';
 
+import {
+    type Settings,
+    type BookingDates,
+} from '@/src/lib/supabase/dataService/booking.service';
 import 'react-day-picker/dist/style.css';
-import { isWithinInterval } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
+import { isAlreadyBooked } from '@/src/utils/isAlreadyBooked';
+import { differenceInDays, isPast, isWithinInterval } from 'date-fns';
 import { type Cabin } from '@/src/lib/supabase/dataService/cabin.service';
-import { type Settings } from '@/src/lib/supabase/dataService/booking.service';
-import { useContext } from 'react';
-import { ReservationContext } from '@/src/contexts/ReservationContext';
 import { useReservationContenxt } from '@/src/hooks/useReservationContext';
-
-// function isAlreadyBooked(range, datesArr) {
-//     return (
-//         range.from &&
-//         range.to &&
-//         datesArr.some((date) =>
-//             isWithinInterval(date, {
-//                 start: range.from,
-//                 end: range.to,
-//             }),
-//         )
-//     );
-// }
 
 type DateSelectorProps = {
     cabin: Cabin;
-    bookedDates: Date[];
+    bookedDates: BookingDates;
     bookingSettings: Settings;
 };
 
@@ -33,41 +22,51 @@ export default function DateSelector({
     bookedDates,
     bookingSettings,
 }: DateSelectorProps) {
-    const { range, setRange, resetRange } = useReservationContenxt();
-
-    // CHANGE
-    const discount = 23;
-    const numNights = 23;
-    const cabinPrice = 23;
-    const regularPrice = 23;
+    const { discount, regularPrice } = cabin;
 
     const { minBookingLength, maxBookingLength } = bookingSettings;
 
-    const currentDate = new Date();
-    const currentMonth = new Date().getMonth();
-    const currentYear = new Date().getFullYear();
+    const { range, setRange, resetRange } = useReservationContenxt();
+
+    const displayRange = isAlreadyBooked(range, bookedDates)
+        ? { from: undefined, to: undefined }
+        : range;
+
+    const numNights = differenceInDays(displayRange?.to!, displayRange?.from!);
+    const cabinPrice = numNights * (regularPrice! - discount!);
+
+    const curMonth = new Date().getMonth();
+    const curYear = new Date().getFullYear();
 
     return (
         <div className="flex flex-col justify-between">
             <DayPicker
                 mode="range"
-                selected={range}
                 onSelect={setRange}
+                selected={displayRange}
                 max={maxBookingLength!}
                 captionLayout="dropdown"
                 min={minBookingLength! + 1}
                 className="my-auto place-self-center"
-                startMonth={new Date(currentYear, currentMonth)}
-                endMonth={new Date(currentYear + 5, 11)}
-                hidden={{ before: currentDate }}
+                startMonth={new Date(curYear, curMonth)}
+                endMonth={new Date(curYear + 5, 11)}
+                disabled={(curDate) =>
+                    isPast(curDate) ||
+                    bookedDates.some((date) =>
+                        isWithinInterval(curDate, {
+                            start: date.startDate!,
+                            end: date.endDate!,
+                        }),
+                    )
+                }
             />
             <div className="flex h-[72px] items-center justify-between bg-accent-500 px-8 text-primary-800">
                 <div className="flex items-baseline gap-6">
                     <p className="flex items-baseline gap-2">
-                        {discount > 0 ? (
+                        {discount! > 0 ? (
                             <>
                                 <span className="text-2xl">
-                                    ${regularPrice - discount}
+                                    ${regularPrice! - discount!}
                                 </span>
                                 <span className="font-semibold text-primary-700 line-through">
                                     ${regularPrice}

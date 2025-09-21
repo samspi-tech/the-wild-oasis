@@ -4,35 +4,36 @@ import { type GuestId } from './guest.service';
 import { type Tables } from '../database.types';
 import { type QueryData } from '@supabase/supabase-js';
 
+const bookingsQuery = supabase.from('bookings').select('startDate, endDate');
+
+export type BookingDates = QueryData<typeof bookingsQuery>;
+
 export async function getBookedDatesByCabinId(cabinId: number) {
-    let today: string | Date = new Date();
+    type Today = string | Date;
+
+    let today: Today = new Date();
     today.setUTCHours(0, 0, 0, 0);
     today = today.toISOString();
 
-    const bookingsQuery = supabase
-        .from('bookings')
-        .select('startDate, endDate')
+    bookingsQuery
         .eq('cabinId', cabinId)
         .or(`startDate.gte.${today},status.eq.checked-in`);
-
-    type BookingDates = QueryData<typeof bookingsQuery>;
 
     const { data, error } = await bookingsQuery;
 
     if (error) throw new Error('Bookings could not get loaded');
 
+    data.map((booking) => {
+        const { startDate, endDate } = booking;
+
+        return eachDayOfInterval({
+            start: new Date(startDate!),
+            end: new Date(endDate!),
+        });
+    }).flat();
+
     const bookedDates: BookingDates = data;
-
-    return bookedDates
-        .map((booking) => {
-            const { startDate, endDate } = booking;
-
-            return eachDayOfInterval({
-                start: new Date(startDate!),
-                end: new Date(endDate!),
-            });
-        })
-        .flat();
+    return bookedDates;
 }
 
 export type Settings = Tables<'settings'>;
