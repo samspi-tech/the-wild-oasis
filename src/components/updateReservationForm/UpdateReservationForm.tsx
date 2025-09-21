@@ -51,7 +51,9 @@ export default function UpdateReservationForm({
                     className="w-full rounded-sm bg-primary-200 px-5 py-3 text-primary-800 shadow-sm"
                 />
             </div>
-            <SubmitButton text="Update reservation" />
+            <SubmitButton pendingLabel="Updating...">
+                Update reservation
+            </SubmitButton>
         </form>
     );
 }

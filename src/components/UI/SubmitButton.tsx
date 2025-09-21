@@ -1,10 +1,12 @@
+import { type ReactNode } from 'react';
 import { useFormStatus } from 'react-dom';
 
-type SubmitButtonProps = {
-    text: string;
+type SubmitProps = {
+    children: ReactNode;
+    pendingLabel: string;
 };
 
-export default function SubmitButton({ text }: SubmitButtonProps) {
+export default function SubmitButton({ children, pendingLabel }: SubmitProps) {
     const { pending } = useFormStatus();
 
     return (
@@ -14,7 +16,7 @@ export default function SubmitButton({ text }: SubmitButtonProps) {
                 disabled={pending}
                 className="bg-accent-500 px-8 py-4 font-semibold text-primary-800 transition-all hover:bg-accent-600 disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300"
             >
-                {pending ? 'Updating...' : text}
+                {pending ? pendingLabel : children}
             </button>
         </div>
     );

@@ -3,6 +3,7 @@ import { eachDayOfInterval } from 'date-fns';
 import { type GuestId } from './guest.service';
 import { type Tables } from '../database.types';
 import { type QueryData } from '@supabase/supabase-js';
+import { BookingData } from '@/src/components/reservation/partials/ReservationForm';
 
 const bookingsQuery = supabase.from('bookings').select('startDate, endDate');
 
@@ -86,6 +87,22 @@ type UpdatedFields = {
     numGuests: number;
     observations: string;
 };
+
+type NewBooking = {
+    status: string;
+    isPaid: boolean;
+    guestId: GuestId;
+    totalPrice: number;
+    extrasPrice: number;
+    hasBreakfast: boolean;
+} & UpdatedFields &
+    BookingData;
+
+export async function createBooking(newBooking: NewBooking) {
+    const { error } = await supabase.from('bookings').insert([newBooking]);
+
+    if (error) throw new Error('Booking could not be created');
+}
 
 export async function updateBooking(id: number, updatedFields: UpdatedFields) {
     const { error } = await supabase

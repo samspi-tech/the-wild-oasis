@@ -36,7 +36,7 @@ export type Database = {
                     cabinId?: number | null;
                     cabinPrice?: number | null;
                     created_at?: string;
-                    endDate?: string | null;
+                    endDate?: Date | null;
                     extrasPrice?: number | null;
                     guestId?: number | null;
                     hasBreakfast?: boolean | null;
@@ -45,7 +45,7 @@ export type Database = {
                     numGuests?: number | null;
                     numNights?: number | null;
                     observations?: string | null;
-                    startDate?: string | null;
+                    startDate?: Date | null;
                     status?: string | null;
                     totalPrice?: number | null;
                 };

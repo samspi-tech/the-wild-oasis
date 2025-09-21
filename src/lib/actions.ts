@@ -1,6 +1,7 @@
 'use server';
 
 import {
+    createBooking,
     deleteBooking,
     updateBooking,
 } from './supabase/dataService/booking.service';
@@ -11,6 +12,7 @@ import { getBookingUpdateData } from '../utils/reservationUpdate';
 import { updateGuest } from './supabase/dataService/guest.service';
 import { getGuestId, getGuestUpdateData } from '../utils/guestProfileUpdate';
 import { checkBookingActionPermission } from '../utils/checkBookingActionPermission';
+import { type BookingData } from '../components/reservation/partials/ReservationForm';
 
 export async function signInAction() {
     await signIn('google', { redirectTo: '/account' });
@@ -27,6 +29,35 @@ export async function updateGuestProfile(formData: FormData) {
     await updateGuest(guestId, updateData);
 
     revalidatePath('/account/profile');
+}
+
+export async function createReservation(
+    bookingData: BookingData,
+    formData: FormData,
+) {
+    const guestId = await getGuestId();
+    const totalPrice = bookingData.cabinPrice;
+    const numGuests = Number(formData.get('numGuests'));
+    const observations = <string>formData.get('observations')?.slice(0, 1000);
+
+    const newBooking = {
+        guestId,
+        numGuests,
+        totalPrice,
+        observations,
+        isPaid: false,
+        extrasPrice: 0,
+        hasBreakfast: false,
+        status: 'unconfirmed',
+        ...bookingData,
+    };
+
+    await createBooking(newBooking);
+
+    const { cabinId } = bookingData;
+    revalidatePath(`/cabins/${cabinId}`);
+
+    redirect('/cabins/thankYou');
 }
 
 export async function updateReservation(bookingId: number, formData: FormData) {
